@@ -153,11 +153,18 @@ const resolvers = {
                 throw new Error('Email Taken.')
             }
 
+            // legacy way
+            // const user = {
+            //     id: uuidv4(),
+            //     name: args.name,
+            //     email: args.email,
+            //     age: args.age
+            // }
+
+            // using spread operator
             const user = {
                 id: uuidv4(),
-                name: args.name,
-                email: args.email,
-                age: args.age
+                ...args
             }
 
             users.push(user)
@@ -172,12 +179,20 @@ const resolvers = {
                 throw new Error('user not found')
             }
 
+            // legacy way
+            // const post = {
+            //     id: uuidv4(),
+            //     title: args.title,
+            //     body: args.body,
+            //     published: args.published,
+            //     author: args.author
+            // }
+
+
+            // using spread operator
             const post = {
                 id: uuidv4(),
-                title: args.title,
-                body: args.body,
-                published: args.published,
-                author: args.author
+                ...args
             }
 
             posts.push(post)
@@ -194,15 +209,13 @@ const resolvers = {
                 throw new Error('user not found')
             }
 
-            if (!postExists){
+            if (!postExists) {
                 throw new Error('post not found')
             }
 
             const comment = {
                 id: uuidv4(),
-                text: args.text,
-                author: args.author,
-                post: args.post
+                ...args
             }
 
             comments.push(comment)
